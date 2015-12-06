@@ -8,7 +8,7 @@ using namespace std;
 class String {
     
     private:
-        char m_data[];
+        char* m_data;
         
         int m_capacity;
         
@@ -25,7 +25,7 @@ class String {
         String& operator=(char ch);
         
         char& at(int i);
-        char& operator[](int i);
+        char& operator[](int i) const;
         
         const char* data() const;
         int length() const;
@@ -42,8 +42,8 @@ class String {
         String& operator+=(char* cstr);
         //operator+;
         friend bool operator==(const String& lhs, const String& rhs);
-        
-        //operator<<;
 };
+
+ostream& operator<<(std::ostream &strm, const String &s);
 
 #endif
