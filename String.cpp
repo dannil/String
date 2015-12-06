@@ -32,7 +32,6 @@ String::String(const char* cstr) : String::String() {
         
         i++;
     }
-    cout << "I: " + to_string(i) << endl;
     
     m_data[i] = '\0';
 }
@@ -52,7 +51,7 @@ String::~String() {
 }
 
 char& String::at(int i) {
-    if (i > length()) {
+    if (i > length() - 1) {
         throw std::out_of_range(i + " is not a valid index");
     }
     return m_data[i];
@@ -73,11 +72,19 @@ const char* String::data() const {
 int String::length() const {
     //return strlen(m_data);
     
+//    int i = 0;
+//    char& c = (*this)[i];
+//    
+//    while (c != '\0') {
+//        i++;
+//        c = (*this)[i];
+//    }
+//    
+//    return i;
+    
+    
     for (int i = 0; i < m_capacity; i++) {
-        cout << i << endl;
         if (m_data[i] == '\0') {
-            //cout << i << endl;
-            cout << "returning" << endl;
             return i;
         }
     }
@@ -98,15 +105,18 @@ void String::resize(int n) {
     
     char* newArr = new char[n];
     
-    for (int i = 0; i < n / 2; i++) {
+    //cout << m_data[0] << endl;
+    
+    for (int i = 0; i < m_capacity; i++) {
         newArr[i] = m_data[i];
     }
-    newArr[n / 2 + 1] = '\0';
+    
+    m_capacity = n;
     
     delete[] m_data;
     m_data = newArr;
     
-    m_capacity = n;
+    
 }
 
 ostream& operator<<(ostream &stream, const String &s) {

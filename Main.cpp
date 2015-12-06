@@ -14,13 +14,18 @@ int main(int argc, char** argv) {
     
     //cout << s.at(4) << endl;
     
-    String h("this is a longer test");
+    //String q("abcdefgh ijklmnopq");
     
-    cout << h << endl;
+    //cout << q.length() << endl;
+    
+    String h("abcdefgh ijklmnopq");
+    
+    //cout << h << endl;
     
     //cout << h[0] << endl;
     cout << h.length() << endl;
-    //cout << h.at(20) << endl;
+    cout << h.at(17) << endl;
+    cout << h.at(18) << endl;
     
     
     
