@@ -1,15 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   main.cpp
- * Author: Daniel
- *
- * Created on den 2 december 2015, 18:42
- */
+#include "String.h"
 
 #include <cstdlib>
 
@@ -20,6 +9,23 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
+    //String s("hello");
+    //cout << s.length() << endl;
+    
+    //cout << s.at(4) << endl;
+    
+    String h("this is a test");
+    cout << h.length() << endl;
+    cout << h.capacity() << endl;
+    
+    //cout << s << endl;
+    
+    
+    
+    //String z;
+    
+    //cout << z.capacity() << endl;
+    
     return 0;
 }
 

@@ -2,20 +2,21 @@
 #define STRING_H
 
 #include <iostream>
-#include <array>
 
 using namespace std;
 
 class String {
     
     private:
-        char* content[];
+        char m_data[];
+        
+        int m_capacity;
         
     public:
         String();
+        String(const char* cstr);
         String(const String& rhs);
         //String(String&& rhs);
-        String(const char* cstr);
         ~String();
         
         String& operator=(const String& rhs);
@@ -31,9 +32,11 @@ class String {
         void reserve(int);
         int capacity() const;
         
-        shrink_to_fit();
+        //shrink_to_fit();
+        //void shrink_to_fit();
         void push_back(char c);
-        resize(int n);
+        //resize();
+        void resize(int n);
         
         String& operator+=(const String& rhs);
         String& operator+=(char* cstr);
