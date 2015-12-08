@@ -104,6 +104,28 @@ String& String::operator+=(char* cstr) {
     cout << "Calling += char-sequence assignment";
 }
 
+bool operator==(const String& lhs, const String& rhs) {
+    // Next to if's maybe not needed?
+//    if (lhs.length() == 0 && rhs.length() != 0) {
+//        return false;
+//    }
+//    if (lhs.length() != 0 && rhs.length() == 0) {
+//        return false;
+//    }
+    if (lhs.length() != rhs.length()) {
+        return false;
+    }
+    
+    for (int i = 0; i < lhs.length(); i++) {
+        char c1 = lhs[i];
+        char c2 = rhs[i];
+        if (c1 != c2) {
+            return false;
+        }
+    }
+    return true;
+}
+
 char& String::at(int i) {
     if (i > m_length - 1) {
         throw std::out_of_range(i + " is not a valid index");
@@ -162,28 +184,6 @@ void String::push_back(char c) {
     
     m_data[place] = c;
     m_length++;
-}
-
-bool operator==(const String& lhs, const String& rhs) {
-    // Next to if's maybe not needed?
-//    if (lhs.length() == 0 && rhs.length() != 0) {
-//        return false;
-//    }
-//    if (lhs.length() != 0 && rhs.length() == 0) {
-//        return false;
-//    }
-    if (lhs.length() != rhs.length()) {
-        return false;
-    }
-    
-    for (int i = 0; i < lhs.length(); i++) {
-        char c1 = lhs[i];
-        char c2 = rhs[i];
-        if (c1 != c2) {
-            return false;
-        }
-    }
-    return true;
 }
 
 String operator+(String a, const String& b) {

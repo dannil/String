@@ -26,6 +26,7 @@ class String {
         String& operator=(char ch);
         String& operator+=(const String& rhs);
         String& operator+=(char* cstr);
+        friend bool operator==(const String& lhs, const String& rhs);
         
         char& at(int i);
         char& operator[](int i) const;
@@ -40,8 +41,6 @@ class String {
         void push_back(char c);
         //resize();
         void resize(int n);
-        
-        friend bool operator==(const String& lhs, const String& rhs);
 };
 
 String operator+(String a, const String& b);
