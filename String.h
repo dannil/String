@@ -33,7 +33,7 @@ class String {
         int capacity() const;
         
         //shrink_to_fit();
-        void shrink_to_fit();
+        //void shrink_to_fit();
         void push_back(char c);
         //resize();
         void resize(int n);

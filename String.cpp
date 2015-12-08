@@ -20,9 +20,6 @@ String::String(const char* cstr) : String::String() {
     
     int i = 0;
     while (cstr[i] != '\0') {
-        cout << "C" << endl;
-        cout << cstr[i] << endl;
-        
         //cout << "Capacity: " + to_string(m_capacity) << endl;
         //cout << "i - 1: " + to_string(i - 1) << endl;
         if (i - 1 > m_capacity - 2) {
@@ -31,8 +28,7 @@ String::String(const char* cstr) : String::String() {
         //cout << cstr[i] << endl;
         m_data[i] = cstr[i];
         
-        cout << m_data << endl;
-        
+        cout << m_data[i] << endl;
         
         i++;
     }
@@ -41,52 +37,17 @@ String::String(const char* cstr) : String::String() {
 }
 
 String::String(const String& rhs) {
-    cout << "Calling String copy" << endl;
-    // NEEDS FIXING
-    String *str = new String(rhs.data());
-    str->m_capacity = rhs.capacity();
-    
-//    this->m_data = str->data();
-//    this->m_capacity = str->capacity();
+//    cout << "Copy constructor" << endl;
+//    //char* con[] = new char[4];
+//    m_data[rhs.length()];
+//    //content = char[rhs.length()];
+//    for (int i = 0; i < rhs.length(); i++) {
+//        //content[i] = rhs[i];
+//    }
 }
 
 String::~String() {
     delete[] m_data;
-}
-
-String& String::operator=(const String& rhs) {
-      cout << "Calling String assignment" << endl;
-//    
-//    cout << rhs << endl;
-//    
-//    char* p = new char[rhs.capacity()];
-////    
-//    for (int i = 0; i < rhs.length(); i++) {
-//        cout << "looping" << endl;
-//        char c = rhs[i];
-//        cout << c << endl;
-//        p[i] = c;
-//    }
-//    p[rhs.length() + 1] = '\0';
-//    
-//    cout << "P" << endl;
-//    cout << p << endl;
-//    
-//    String *str;
-//    str = new String(p);
-//    return *str;
-    
-    String *str = new String(rhs.data());
-    str->m_capacity = capacity();
-    return *str;
-}
-
-String& String::operator=(const char* cstr) {
-    
-}
-
-String& String::operator=(char ch) {
-    
 }
 
 char& String::at(int i) {
@@ -109,12 +70,34 @@ const char* String::data() const {
 }
 
 int String::length() const {
-    // NEEDS FIXING
+    //return strlen(m_data);
+    
+//    int i = 0;
+//    char& c = (*this)[i];
+//    
+//    while (c != '\0') {
+//        i++;
+//        c = (*this)[i];
+//    }
+//    
+//    return i;
+    
+    
     for (int i = 0; i < m_capacity; i++) {
         if (m_data[i] == '\0') {
             return i;
         }
     }
+    
+//    int i = 0;
+//    char& c = m_data[0];
+//    cout << c << endl;
+//    while (c != '\0') {
+//        //output += s[i];
+//        i++;
+//        c = m_data[i];
+//    }
+//    return i;
 }
 
 void String::resize(int n) {
@@ -127,30 +110,21 @@ void String::resize(int n) {
     for (int i = 0; i < m_capacity; i++) {
         newArr[i] = m_data[i];
     }
-    newArr[18] = '\0';
     
-    memcpy(newArr, m_data, m_capacity);
-    
-    //strcpy(newArr, m_data);
-    
-    // Delete old array
-    delete[] m_data;
-    
-    // New pointers
-    m_data = newArr;
     m_capacity = n;
+    
+    delete[] m_data;
+    m_data = newArr;
+    
+    
 }
 
 ostream& operator<<(ostream &stream, const String &s) {
     string output;
     
-    cout << "<<" << endl;
-    cout << s.data() << endl;
-    
     int i = 0;
-    char c = s[i];
+    char& c = s[i];
     while (c != '\0') {
-        cout << c << endl;
         output += c;
         i++;
         c = s[i];

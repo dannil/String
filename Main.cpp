@@ -20,32 +20,12 @@ int main(int argc, char** argv) {
     
     String h("abcdefgh ijklmnopq");
     
-    cout << h << endl;
+    //cout << h << endl;
     
     //cout << h[0] << endl;
     cout << h.length() << endl;
-    //cout << h.at(17) << endl;
-    //cout << h.at(18) << endl;
-    
-    //String z("awdvvvv");
-    
-    String v = h;
-    
-    cout << v << endl;
-    
-    //cout << h << endl;
-    
-    //z = h;
-    
-    //cout << h << endl;
-    
-//    String z;
-//    
-//    z = h;
-//    
-//    cout << z << endl;
-    
-    //cout << h << endl;
+    cout << h.at(17) << endl;
+    cout << h.at(18) << endl;
     
     
     
