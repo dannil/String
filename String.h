@@ -41,10 +41,10 @@ class String {
         //resize();
         void resize(int n);
         
-        //operator+;
         friend bool operator==(const String& lhs, const String& rhs);
 };
 
+String operator+(String a, const String& b);
 ostream& operator<<(std::ostream &strm, const String &s);
 
 #endif
