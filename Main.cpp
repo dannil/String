@@ -18,20 +18,72 @@ int main(int argc, char** argv) {
     
     //cout << q.length() << endl;
     
-    String h("abcdefgh ijklmnopq");
+    String h("abcdefgh");
     
-    //cout << h << endl;
+    cout << h << endl;
     
     //cout << h[0] << endl;
     cout << h.length() << endl;
-    cout << h.at(17) << endl;
-    cout << h.at(18) << endl;
     
+    cout << h.at(2) << endl;
+    //cout << h.at(17) << endl;
+    //cout << h.at(18) << endl;
     
+    String z("julian");
     
-    //String z;
+    cout << z << endl;
     
-    //cout << z.capacity() << endl;
+    z = h;
+    
+    cout << z << endl;
+    
+    cout << h << endl;
+    
+    cout << "Testing += String assignment" << endl;
+    
+    String q("testing");
+    String r("my name");
+    
+    q += r;
+    
+    cout << q << endl;
+    
+    cout << q.at(13) << endl;
+    
+    String aa("aa");
+    String bb("bb");
+    
+    String cc = aa;
+    aa = bb;
+    
+    cout << cc << endl;
+    
+    cc.push_back('b');
+    cout << cc << endl;
+    cc.push_back('b');
+    cc.push_back('c');
+    cout << cc << endl;
+    
+    cout << cc.capacity() << endl;
+    cc.shrink_to_fit();
+    cout << cc << endl;
+    cout << cc.capacity() << endl;
+    
+    String eq1("abc");
+    String eq2("abc");
+    
+    bool b1 = (eq1 == eq2);
+    cout << b1 << endl;
+    
+    String s = (eq1 + eq2);
+    
+    String eq3("");
+    String eq4("0");
+   
+    bool b2 = (eq3 == eq4);
+    cout << b2 << endl;
+    
+    //cout << "Char test" << endl;
     
     return 0;
 }

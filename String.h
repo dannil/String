@@ -11,18 +11,21 @@ class String {
         char* m_data;
         
         int m_capacity;
+        int m_length;
         
     public:
         String();
         String(const char* cstr);
         String(const String& rhs);
-        //String(String&& rhs);
+        //String(String&& rhs);     // VG
         ~String();
         
         String& operator=(const String& rhs);
-        //String& operator=(String&& rhs);
+        //String& operator=(String&& rhs);      // VG
         String& operator=(const char* cstr);
         String& operator=(char ch);
+        String& operator+=(const String& rhs);
+        String& operator+=(char* cstr);
         
         char& at(int i);
         char& operator[](int i) const;
@@ -32,14 +35,12 @@ class String {
         void reserve(int);
         int capacity() const;
         
-        //shrink_to_fit();
-        //void shrink_to_fit();
+        //shrink_to_fit();      // VG
+        void shrink_to_fit();
         void push_back(char c);
         //resize();
         void resize(int n);
         
-        String& operator+=(const String& rhs);
-        String& operator+=(char* cstr);
         //operator+;
         friend bool operator==(const String& lhs, const String& rhs);
 };

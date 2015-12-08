@@ -3,55 +3,109 @@
 
 #include "String.h"
 
-#include <cstring>
 #include <stdexcept>
 
 using namespace std;
 
-String::String() {
-    cout << "Calling default constructor" << endl;
-    m_capacity = 16;
+String::String() : m_data(nullptr), m_capacity(0), m_length(0) {
     
-    m_data = new char[m_capacity];
 }
 
-String::String(const char* cstr) : String::String() {
-    cout << "Calling char constructor" << endl;
+String::String(const char* cstr) {
+    cout << "Calling constructor" << endl;
     
-    int i = 0;
-    while (cstr[i] != '\0') {
-        //cout << "Capacity: " + to_string(m_capacity) << endl;
-        //cout << "i - 1: " + to_string(i - 1) << endl;
-        if (i - 1 > m_capacity - 2) {
-            resize(m_capacity * 2);
-        }
-        //cout << cstr[i] << endl;
-        m_data[i] = cstr[i];
-        
-        cout << m_data[i] << endl;
-        
-        i++;
+    m_length = 0;
+    while (cstr[m_length] != '\0') {
+        m_length++;
     }
     
-    m_data[i] = '\0';
+    m_data = new char[m_length];
+    for (int i = 0; i < m_length; i++) {
+        m_data[i] = cstr[i];
+    }
+    
+    m_capacity = m_length;
 }
 
 String::String(const String& rhs) {
-//    cout << "Copy constructor" << endl;
-//    //char* con[] = new char[4];
-//    m_data[rhs.length()];
-//    //content = char[rhs.length()];
-//    for (int i = 0; i < rhs.length(); i++) {
-//        //content[i] = rhs[i];
-//    }
+    m_length = rhs.m_length;
+    if (m_length == 0) {
+        m_data = nullptr;
+    } else {
+        m_data = new char[m_length];
+        for (int i = 0; i < m_length; i++) {
+            m_data[i] = rhs.m_data[i];
+        }
+    }
+    
+    m_capacity = m_length;
 }
 
 String::~String() {
     delete[] m_data;
 }
 
+String& String::operator=(const String& rhs) {
+    cout << "Calling = String" << endl;
+      
+    delete[] m_data;
+      
+    m_length = rhs.m_length;
+    m_data = new char[m_length];
+
+    for (int i = 0; i < m_length; i++) {
+        m_data[i] = rhs[i];
+    }
+
+    m_capacity = rhs.m_capacity;
+
+    return *this;
+}
+
+String& String::operator=(const char* cstr) {
+    cout << "Calling = char-sequence" << endl;
+    
+//    String *s = new String(cstr);
+//    
+//    
+//    
+//    return *s;
+}
+
+String& String::operator=(char ch) {
+    cout << "Calling = char" << endl;
+}
+
+String& String::operator+=(const String& rhs) {
+    cout << "Calling += String" << endl;
+    
+    int totalLength = m_length + rhs.m_length;
+    
+    char* temp = new char[totalLength];
+    
+    for (int i = 0; i < m_length; i++) {
+        temp[i] = m_data[i];
+    }
+    for (int j = 0; j < rhs.m_length; j++) {
+        temp[m_length + j] = rhs.m_data[j];
+    }
+    
+    delete[] m_data;
+    
+    m_data = temp;
+    
+    m_capacity = rhs.m_capacity;
+    m_length = totalLength;
+    
+    return *this;
+}
+
+String& String::operator+=(char* cstr) {
+    cout << "Calling += char-sequence assignment";
+}
+
 char& String::at(int i) {
-    if (i > length() - 1) {
+    if (i > m_length - 1) {
         throw std::out_of_range(i + " is not a valid index");
     }
     return m_data[i];
@@ -70,67 +124,80 @@ const char* String::data() const {
 }
 
 int String::length() const {
-    //return strlen(m_data);
-    
-//    int i = 0;
-//    char& c = (*this)[i];
-//    
-//    while (c != '\0') {
-//        i++;
-//        c = (*this)[i];
-//    }
-//    
-//    return i;
-    
-    
-    for (int i = 0; i < m_capacity; i++) {
-        if (m_data[i] == '\0') {
-            return i;
-        }
-    }
-    
-//    int i = 0;
-//    char& c = m_data[0];
-//    cout << c << endl;
-//    while (c != '\0') {
-//        //output += s[i];
-//        i++;
-//        c = m_data[i];
-//    }
-//    return i;
+    return m_length;
 }
 
 void String::resize(int n) {
     cout << "Calling resize" << endl;
     
-    char* newArr = new char[n];
-    
-    //cout << m_data[0] << endl;
-    
-    for (int i = 0; i < m_capacity; i++) {
-        newArr[i] = m_data[i];
-    }
-    
-    m_capacity = n;
-    
-    delete[] m_data;
-    m_data = newArr;
-    
-    
-}
-
-ostream& operator<<(ostream &stream, const String &s) {
-    string output;
+    char* temp = new char[n];
     
     int i = 0;
-    char& c = s[i];
-    while (c != '\0') {
-        output += c;
+    while (i < m_length) {
+        temp[i] = m_data[i];
         i++;
-        c = s[i];
     }
     
-    return stream << output;
+    // Delete old array
+    delete[] m_data;
+    
+    // New pointers
+    m_data = temp;
+    m_capacity = n;
+}
+
+void String::shrink_to_fit() {
+    resize(m_length);
+}
+
+void String::push_back(char c) {
+    int place = m_length;
+    
+    cout << place << endl;
+    cout << m_capacity << endl;
+    
+    if (place >= m_capacity) {
+        resize(m_capacity * 2);
+    }
+    
+    m_data[place] = c;
+    m_length++;
+}
+
+bool operator==(const String& lhs, const String& rhs) {
+    // Next to if's maybe not needed?
+//    if (lhs.length() == 0 && rhs.length() != 0) {
+//        return false;
+//    }
+//    if (lhs.length() != 0 && rhs.length() == 0) {
+//        return false;
+//    }
+    if (lhs.length() != rhs.length()) {
+        return false;
+    }
+    
+    for (int i = 0; i < lhs.length(); i++) {
+        char c1 = lhs[i];
+        char c2 = rhs[i];
+        if (c1 != c2) {
+            return false;
+        }
+    }
+    return true;
+}
+
+String operator+(String a, const String& b) {
+    cout << "Calling + String,String" << endl;
+    a += b;
+    return a;
+}
+
+ostream& operator<<(ostream& stream, const String& s) {
+    for (int i = 0; i < s.length(); i++) {
+        stream << s[i];
+    }
+    
+    return stream;
 }
 
 #endif
