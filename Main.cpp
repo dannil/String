@@ -1,6 +1,6 @@
 #include "String.h"
 
-#include <cstdlib>
+#include <stdexcept>
 #include "assert.h"
 
 using namespace std;
@@ -30,12 +30,12 @@ int main(int argc, char** argv) {
     
     try {
         s2.at(-1);
-    } catch (std::out_of_range&) {
+    } catch (out_of_range& e) {
         assert(true);
     }
     try {
         s2.at(2);
-    } catch (std::out_of_range&) {
+    } catch (out_of_range& e) {
         assert(false);
     }
     assert(s2.at(2) = 'r');
