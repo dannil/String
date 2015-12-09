@@ -50,16 +50,19 @@ String::~String() {
 String& String::operator=(const String& rhs) {
     //cout << "Calling = String" << endl;
       
-    delete[] m_data;
-      
     m_length = rhs.m_length;
-    m_data = new char[m_length + 1];
+    
+    char* newArray = new char[m_length + 1];
 
     for (int i = 0; i < m_length; i++) {
-        m_data[i] = rhs[i];
+        newArray[i] = rhs[i];
     }
-    m_data[m_length] = '\0';
-
+    newArray[m_length] = '\0';
+    
+    delete[] m_data;
+    
+    m_data = newArray;
+   
     m_capacity = rhs.m_capacity;
 
     return *this;
@@ -67,8 +70,6 @@ String& String::operator=(const String& rhs) {
 
 String& String::operator=(const char* cstr) {
     //cout << "Calling = char-sequence" << endl;
-    
-    delete[] m_data;
     
     m_length = 0;
     while (cstr[m_length] != '\0') {
@@ -82,8 +83,11 @@ String& String::operator=(const char* cstr) {
     }
     newArray[m_length] = '\0';
     
-    m_data = newArray;
+    // Delete old array
+    delete[] m_data;
     
+    // Assign new pointers
+    m_data = newArray;
     m_capacity = m_length;
     
     return *this;
@@ -114,8 +118,8 @@ String& String::operator+=(const String& rhs) {
     for (int i = 0; i < m_length; i++) {
         newArray[i] = m_data[i];
     }
-    for (int j = 0; j < rhs.m_length; j++) {
-        newArray[m_length + j] = rhs.m_data[j];
+    for (int j = m_length; j < totalLength; j++) {
+        newArray[j] = rhs.m_data[j - m_length];
     }
     newArray[totalLength] = '\0';
     
@@ -202,6 +206,10 @@ int String::capacity() const {
 }
 
 const char* String::data() const {
+    //cout << "DATA" << endl;
+    
+    //cout << m_data << endl;
+    
     return m_data;
 }
 
