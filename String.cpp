@@ -42,6 +42,9 @@ String::String(const String& rhs) {
 }
 
 String::~String() {
+    for (int i = 0; i < m_capacity; i++) {
+        
+    }
     delete[] m_data;
 }
 
