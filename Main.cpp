@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
     
     cout << h << endl;
     
-    cout << "Testing += String assignment" << endl;
+    //cout << "Testing += String assignment" << endl;
     
     String q("testing");
     String r("my name");
