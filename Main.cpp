@@ -1,6 +1,7 @@
 #include "String.h"
 
 #include <cstdlib>
+#include "assert.h"
 
 using namespace std;
 
@@ -8,19 +9,58 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
+    String s0;          assert(s0 == "");
+    String s1("foo");   assert(s1 == "foo");
+    String s2(s1);      assert(s2 == "foo");
+    String s3("bar");   assert(s3 == "bar");
+    
+    delete new String("hej");
+    
+    assert((s2 = s3) == s3);
+    assert((s2 = s2) == s3);
+    
+    assert((s2 = "foo") == "foo");
+    assert((s2 = "bar") == "bar");
+    
+    (s2 += s1) += (s3 += s1);
+    assert(s3 == "barfoo" && s2 == "barfoobarfoo" && s1 == "foo");
+    
+    s2 = "bar";
+    assert(s1 + s2 == "foobar" && s1 == "foo");
+    
+    try {
+        s2.at(-1);
+    } catch (std::out_of_range&) {
+        assert(true);
+    }
+    try {
+        s2.at(2);
+    } catch (std::out_of_range&) {
+        assert(false);
+    }
+    assert(s2.at(2) = 'r');
+    
+    s2[-1];
+    s2[1000];
+    assert(s2[1] == 'a');
+    
+    s2.push_back('a');
+    assert(s2 == "bara");
+    
+    s2.shrink_to_fit();
+    assert(s2.length() == s2.capacity());
+    
+    const char* p1 = s2.data();
+    assert(p1 == s2.data());
+   
+    String s4(s2.data());
+    s2.shrink_to_fit();
+    
+    assert(s4 == s2.data());
 
-    //String s("hello");
-    //cout << s.length() << endl;
     
-    //cout << s.at(4) << endl;
-    
-    //String q("abcdefgh ijklmnopq");
-    
-    //cout << q.length() << endl;
     
     String h("abcdefgh");
-    
-    cout << h << endl;
     
     cout << h.data() << endl;
     
@@ -71,10 +111,18 @@ int main(int argc, char** argv) {
     String aa("aa");
     String bb("bb");
     
-    String cc = aa;
-    aa = bb;
+    String dd(aa);
+    
+    cout << dd << endl;
+    
+    dd = dd;
+    
+    cout << dd << endl;
     
     bb.data();
+    
+    String cc = aa;
+    aa = bb;
     
     cout << cc << endl;
     
