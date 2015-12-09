@@ -137,9 +137,15 @@ String& String::operator+=(char* cstr) {
     for (int i = 0; i < m_length; i++) {
         newArray[i] = m_data[i];
     }
-    for (int j = 0; j < length; j++) {
-        newArray[m_length + j] = cstr[j];
+    
+    cout << newArray << endl;
+    
+    for (int j = m_length; j < totalLength; j++) {
+        
+        newArray[j] = cstr[j - m_length];
+        cout << newArray << endl;
     }
+    
     newArray[totalLength] = '\0';
     
     delete[] m_data;
