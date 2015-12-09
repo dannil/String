@@ -132,7 +132,7 @@ int main(int argc, char** argv) {
     // b
     cout << vv << endl;
     
-    String yy('c');
+    String yy("c");
     yy += "bb";
     
     // ababb
