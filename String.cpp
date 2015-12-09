@@ -19,7 +19,7 @@ String::String(const char* cstr) {
         m_length++;
     }
     
-    m_data = new char[m_length];
+    m_data = new char[m_length + 1];
     for (int i = 0; i < m_length; i++) {
         m_data[i] = cstr[i];
     }
@@ -33,7 +33,7 @@ String::String(const String& rhs) {
     if (m_length == 0) {
         m_data = nullptr;
     } else {
-        m_data = new char[m_length];
+        m_data = new char[m_length + 1];
         for (int i = 0; i < m_length; i++) {
             m_data[i] = rhs.m_data[i];
         }
@@ -53,7 +53,7 @@ String& String::operator=(const String& rhs) {
     delete[] m_data;
       
     m_length = rhs.m_length;
-    m_data = new char[m_length];
+    m_data = new char[m_length + 1];
 
     for (int i = 0; i < m_length; i++) {
         m_data[i] = rhs[i];
@@ -75,7 +75,7 @@ String& String::operator=(const char* cstr) {
         m_length++;
     }
     
-    char* newArray = new char[m_length];
+    char* newArray = new char[m_length + 1];
     
     for (int i = 0; i < m_length; i++) {
         newArray[i] = cstr[i];
@@ -109,7 +109,7 @@ String& String::operator+=(const String& rhs) {
     
     int totalLength = m_length + rhs.m_length;
     
-    char* newArray = new char[totalLength];
+    char* newArray = new char[totalLength + 1];
     
     for (int i = 0; i < m_length; i++) {
         newArray[i] = m_data[i];
@@ -139,7 +139,7 @@ String& String::operator+=(char* cstr) {
     
     int totalLength = m_length + length;
     
-    char* newArray = new char[totalLength];
+    char* newArray = new char[totalLength + 1];
     
     for (int i = 0; i < m_length; i++) {
         newArray[i] = m_data[i];
