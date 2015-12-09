@@ -69,15 +69,22 @@ String& String::operator=(const char* cstr) {
     cout << "Calling = char-sequence" << endl;
     
     delete[] m_data;
-
-    int index = 0;
-    while (cstr[index] != '\0') {
-        push_back(cstr[index]);
-        index++;
-    }
-    push_back('\0');
     
-    m_capacity = index;
+    m_length = 0;
+    while (cstr[m_length] != '\0') {
+        m_length++;
+    }
+    
+    char* newArray = new char[m_length];
+    
+    for (int i = 0; i < m_length; i++) {
+        newArray[i] = cstr[i];
+    }
+    newArray[m_length] = '\0';
+    
+    m_data = newArray;
+    
+    m_capacity = m_length;
     
     return *this;
 }
@@ -138,14 +145,9 @@ String& String::operator+=(char* cstr) {
         newArray[i] = m_data[i];
     }
     
-    cout << newArray << endl;
-    
     for (int j = m_length; j < totalLength; j++) {
-        
         newArray[j] = cstr[j - m_length];
-        cout << newArray << endl;
     }
-    
     newArray[totalLength] = '\0';
     
     delete[] m_data;
@@ -207,20 +209,6 @@ int String::length() const {
     return m_length;
 }
 
-//void String::reserve(int n) {
-//    cout << "Calling reserve" << endl;
-//    
-//    cout << n << endl;
-//    cout << m_length << endl;
-//    
-//    if (n > m_length) {
-//        for (int i = m_length; i < n; i++) {
-//            cout << "Adding char" << endl;
-//            m_data[i] = *new char();
-//        }
-//    }
-//}
-
 void String::resize(int n) {
     cout << "Calling resize" << endl;
     
@@ -248,12 +236,8 @@ void String::shrink_to_fit() {
 void String::push_back(char c) {
     int place = m_length;
     
-//    cout << place << endl;
-//    cout << m_capacity << endl;
-    
     if (place >= m_capacity) {
         resize((m_capacity + 1) * 2);
-        //reserve((m_capacity + 1) * 2);
     }
     
     m_data[place] = c;
