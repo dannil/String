@@ -34,9 +34,12 @@ int main(int argc, char** argv) {
     
     cout << j << endl;
     
+    //cout << h[0] << endl;
     cout << h.length() << endl;
     
     cout << h.at(2) << endl;
+    //cout << h.at(17) << endl;
+    //cout << h.at(18) << endl;
     
     String z("julian");
     
@@ -85,7 +88,6 @@ int main(int argc, char** argv) {
     cc.shrink_to_fit();
     cout << cc << endl;
     cout << cc.capacity() << endl;
-    cout << cc.data() << endl;
     
     String eq1("abc");
     String eq2("abc");
