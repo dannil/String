@@ -33,13 +33,13 @@ class String {
         
         const char* data() const;
         int length() const;
-        void reserve(int);
         int capacity() const;
         
         //shrink_to_fit();      // VG
         void shrink_to_fit();
         void push_back(char c);
         //resize();
+        void reserve(int n);
         void resize(int n);
 };
 

@@ -47,9 +47,9 @@ String::~String() {
 
 String& String::operator=(const String& rhs) {
     cout << "Calling = String" << endl;
-      
-    delete[] m_data;
-      
+    
+    // delete[] m_data;
+    
     m_length = rhs.m_length;
     m_data = new char[m_length];
 
@@ -81,8 +81,6 @@ String& String::operator=(const char* cstr) {
 String& String::operator=(char ch) {
     cout << "Calling = char" << endl;
     
-    delete[] m_data;
-    
     m_data = new char[1];
     m_data[0] = ch;
     
@@ -105,8 +103,6 @@ String& String::operator+=(const String& rhs) {
     for (int j = 0; j < rhs.m_length; j++) {
         temp[m_length + j] = rhs.m_data[j];
     }
-    
-    delete[] m_data;
     
     m_data = temp;
     
@@ -134,8 +130,6 @@ String& String::operator+=(char* cstr) {
     for (int j = 0; j < length; j++) {
         temp[m_length + j] = cstr[j];
     }
-    
-    delete[] m_data;
     
     m_data = temp;
     
@@ -194,6 +188,19 @@ int String::length() const {
     return m_length;
 }
 
+void String::reserve(int n) {
+    cout << "Calling reserve" << endl;
+    
+    cout << m_length << endl;
+    cout << n << endl;
+    
+    if (n > m_length) {
+        for (int i = m_length; i < n; i++) {
+            m_data[i] = *new char();
+        }
+    }
+}
+
 void String::resize(int n) {
     cout << "Calling resize" << endl;
     
@@ -204,9 +211,6 @@ void String::resize(int n) {
         temp[i] = m_data[i];
         i++;
     }
-    
-    // Delete old array
-    delete[] m_data;
     
     // New pointers
     m_data = temp;
@@ -224,6 +228,7 @@ void String::push_back(char c) {
 //    cout << m_capacity << endl;
     
     if (place >= m_capacity) {
+        //reserve((m_capacity + 1) * 2);
         resize((m_capacity + 1) * 2);
     }
     
