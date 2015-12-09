@@ -12,7 +12,7 @@ String::String() : m_data(nullptr), m_capacity(0), m_length(0) {
 }
 
 String::String(const char* cstr) {
-    cout << "Calling constructor" << endl;
+    //cout << "Calling constructor" << endl;
     
     m_length = 0;
     while (cstr[m_length] != '\0') {
@@ -48,7 +48,7 @@ String::~String() {
 }
 
 String& String::operator=(const String& rhs) {
-    cout << "Calling = String" << endl;
+    //cout << "Calling = String" << endl;
       
     delete[] m_data;
       
@@ -66,7 +66,7 @@ String& String::operator=(const String& rhs) {
 }
 
 String& String::operator=(const char* cstr) {
-    cout << "Calling = char-sequence" << endl;
+    //cout << "Calling = char-sequence" << endl;
     
     delete[] m_data;
     
@@ -90,7 +90,7 @@ String& String::operator=(const char* cstr) {
 }
 
 String& String::operator=(char ch) {
-    cout << "Calling = char" << endl;
+    //cout << "Calling = char" << endl;
     
     delete[] m_data;
     
@@ -105,7 +105,7 @@ String& String::operator=(char ch) {
 }
 
 String& String::operator+=(const String& rhs) {
-    cout << "Calling += String" << endl;
+    //cout << "Calling += String" << endl;
     
     int totalLength = m_length + rhs.m_length;
     
@@ -130,7 +130,7 @@ String& String::operator+=(const String& rhs) {
 }
 
 String& String::operator+=(char* cstr) {
-    cout << "Calling += char-sequence assignment" << endl;
+    //cout << "Calling += char-sequence assignment" << endl;
     
     int length = 0;
     while (cstr[length] != '\0') {
@@ -210,7 +210,7 @@ int String::length() const {
 }
 
 void String::resize(int n) {
-    cout << "Calling resize" << endl;
+    //cout << "Calling resize" << endl;
     
     char* newArray = new char[n + 1];
     
@@ -245,7 +245,7 @@ void String::push_back(char c) {
 }
 
 String operator+(String a, const String& b) {
-    cout << "Calling + String,String" << endl;
+    //cout << "Calling + String,String" << endl;
     a += b;
     return a;
 }
