@@ -212,7 +212,7 @@ int String::length() const {
 void String::resize(int n) {
     cout << "Calling resize" << endl;
     
-    char* newArray = new char[n];
+    char* newArray = new char[n + 1];
     
     int i = 0;
     while (i < m_length) {
