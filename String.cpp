@@ -65,15 +65,31 @@ String& String::operator=(const String& rhs) {
 String& String::operator=(const char* cstr) {
     cout << "Calling = char-sequence" << endl;
     
-//    String *s = new String(cstr);
-//    
-//    
-//    
-//    return *s;
+    delete[] m_data;
+
+    int index = 0;
+    while (cstr[index] != '\0') {
+        push_back(cstr[index]);
+        index++;
+    }
+    
+    m_capacity = index;
+    
+    return *this;
 }
 
 String& String::operator=(char ch) {
     cout << "Calling = char" << endl;
+    
+    delete[] m_data;
+    
+    m_data = new char[1];
+    m_data[0] = ch;
+    
+    m_length = 1;
+    m_capacity = 1;
+    
+    return *this;
 }
 
 String& String::operator+=(const String& rhs) {
@@ -94,29 +110,58 @@ String& String::operator+=(const String& rhs) {
     
     m_data = temp;
     
-    m_capacity = rhs.m_capacity;
+    m_capacity = totalLength;
     m_length = totalLength;
     
     return *this;
 }
 
 String& String::operator+=(char* cstr) {
-    cout << "Calling += char-sequence assignment";
+    cout << "Calling += char-sequence assignment" << endl;
+    
+    int length = 0;
+    while (cstr[length] != '\0') {
+        length++;
+    }
+    
+    int totalLength = m_length + length;
+    
+    char* temp = new char[totalLength];
+    
+    for (int i = 0; i < m_length; i++) {
+        temp[i] = m_data[i];
+    }
+    for (int j = 0; j < length; j++) {
+        temp[m_length + j] = cstr[j];
+    }
+    
+    delete[] m_data;
+    
+    m_data = temp;
+    
+    m_capacity += length;
+    m_length = totalLength;
+    
+    return *this;
 }
 
 bool operator==(const String& lhs, const String& rhs) {
-    // Next to if's maybe not needed?
-//    if (lhs.length() == 0 && rhs.length() != 0) {
-//        return false;
-//    }
-//    if (lhs.length() != 0 && rhs.length() == 0) {
-//        return false;
-//    }
+    // Next two if's maybe not needed?
+    if (lhs.length() == 0 && rhs.length() != 0) {
+        return false;
+    }
+    if (lhs.length() != 0 && rhs.length() == 0) {
+        return false;
+    }
+    
+    // Needed to avoid unnecessary looping
     if (lhs.length() != rhs.length()) {
         return false;
     }
     
-    for (int i = 0; i < lhs.length(); i++) {
+    int max = (lhs.length() > rhs.length() ? lhs.length() : rhs.length());
+    
+    for (int i = 0; i < max; i++) {
         char c1 = lhs[i];
         char c2 = rhs[i];
         if (c1 != c2) {
@@ -175,11 +220,11 @@ void String::shrink_to_fit() {
 void String::push_back(char c) {
     int place = m_length;
     
-    cout << place << endl;
-    cout << m_capacity << endl;
+//    cout << place << endl;
+//    cout << m_capacity << endl;
     
     if (place >= m_capacity) {
-        resize(m_capacity * 2);
+        resize((m_capacity + 1) * 2);
     }
     
     m_data[place] = c;

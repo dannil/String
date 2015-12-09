@@ -10,8 +10,8 @@ class String {
     private:
         char* m_data;
         
-        int m_capacity;
         int m_length;
+        int m_capacity;
         
     public:
         String();
