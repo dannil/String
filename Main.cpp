@@ -28,11 +28,11 @@ int main(int argc, char** argv) {
     
     //cout << gg << endl;
     
-//    int index = 0;
-//    while (gg[index] != '\0') {
-//        cout << gg[index];
-//        index++;
-//    }
+    String g("abcde");
+    
+    String j(g.data());
+    
+    cout << j << endl;
     
     //cout << h[0] << endl;
     cout << h.length() << endl;
