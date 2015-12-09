@@ -42,9 +42,6 @@ String::String(const String& rhs) {
 }
 
 String::~String() {
-    for (int i = 0; i < m_capacity; i++) {
-        
-    }
     delete[] m_data;
 }
 
@@ -197,28 +194,28 @@ int String::length() const {
     return m_length;
 }
 
-void String::reserve(int n) {
-    cout << "Calling reserve" << endl;
-    
-    cout << n << endl;
-    cout << m_length << endl;
-    
-    if (n > m_length) {
-        for (int i = m_length; i < n; i++) {
-            cout << "Adding char" << endl;
-            //m_data[i] = *new char();
-        }
-    }
-}
+//void String::reserve(int n) {
+//    cout << "Calling reserve" << endl;
+//    
+//    cout << n << endl;
+//    cout << m_length << endl;
+//    
+//    if (n > m_length) {
+//        for (int i = m_length; i < n; i++) {
+//            cout << "Adding char" << endl;
+//            m_data[i] = *new char();
+//        }
+//    }
+//}
 
 void String::resize(int n) {
     cout << "Calling resize" << endl;
     
-    char* temp = new char[n];
+    char* newArray = new char[n];
     
     int i = 0;
     while (i < m_length) {
-        temp[i] = m_data[i];
+        newArray[i] = m_data[i];
         i++;
     }
     
@@ -226,10 +223,8 @@ void String::resize(int n) {
     delete[] m_data;
     
     // New pointers
-    m_data = temp;
+    m_data = newArray;
     m_capacity = n;
-    
-    reserve(n);
 }
 
 void String::shrink_to_fit() {
