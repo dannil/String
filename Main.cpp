@@ -22,6 +22,18 @@ int main(int argc, char** argv) {
     
     cout << h << endl;
     
+    cout << h.data() << endl;
+    
+    //const char* gg = h.data();
+    
+    //cout << gg << endl;
+    
+//    int index = 0;
+//    while (gg[index] != '\0') {
+//        cout << gg[index];
+//        index++;
+//    }
+    
     //cout << h[0] << endl;
     cout << h.length() << endl;
     
@@ -32,6 +44,8 @@ int main(int argc, char** argv) {
     String z("julian");
     
     cout << z << endl;
+    
+    cout << z.data() << endl;
     
     z = h;
     
@@ -46,8 +60,12 @@ int main(int argc, char** argv) {
     
     q += r;
     
+    //testingmy name
     cout << q << endl;
     
+    cout << q.data() << endl;
+    
+    //testingmy nam[e]
     cout << q.at(13) << endl;
     
     String aa("aa");
@@ -55,6 +73,8 @@ int main(int argc, char** argv) {
     
     String cc = aa;
     aa = bb;
+    
+    bb.data();
     
     cout << cc << endl;
     
@@ -76,6 +96,9 @@ int main(int argc, char** argv) {
     cout << b1 << endl;
     
     String s = (eq1 + eq2);
+    
+    // abcabc
+    cout << s << endl;
     
     String eq3("");
     String eq4("0");

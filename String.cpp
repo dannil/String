@@ -19,10 +19,11 @@ String::String(const char* cstr) {
         m_length++;
     }
     
-    m_data = new char[m_length];
+    m_data = new char[m_length + 1];
     for (int i = 0; i < m_length; i++) {
         m_data[i] = cstr[i];
     }
+    m_data[m_length + 1] = '\0';
     
     m_capacity = m_length;
 }
@@ -32,10 +33,11 @@ String::String(const String& rhs) {
     if (m_length == 0) {
         m_data = nullptr;
     } else {
-        m_data = new char[m_length];
+        m_data = new char[m_length + 1];
         for (int i = 0; i < m_length; i++) {
             m_data[i] = rhs.m_data[i];
         }
+        m_data[m_length + 1] = '\0';
     }
     
     m_capacity = m_length;
@@ -51,11 +53,12 @@ String& String::operator=(const String& rhs) {
     delete[] m_data;
       
     m_length = rhs.m_length;
-    m_data = new char[m_length];
+    m_data = new char[m_length + 1];
 
     for (int i = 0; i < m_length; i++) {
         m_data[i] = rhs[i];
     }
+    m_data[m_length + 1] = '\0';
 
     m_capacity = rhs.m_capacity;
 
@@ -72,6 +75,7 @@ String& String::operator=(const char* cstr) {
         push_back(cstr[index]);
         index++;
     }
+    push_back('\0');
     
     m_capacity = index;
     
@@ -83,8 +87,9 @@ String& String::operator=(char ch) {
     
     delete[] m_data;
     
-    m_data = new char[1];
+    m_data = new char[2];
     m_data[0] = ch;
+    m_data[1] = '\0';
     
     m_length = 1;
     m_capacity = 1;
@@ -97,18 +102,19 @@ String& String::operator+=(const String& rhs) {
     
     int totalLength = m_length + rhs.m_length;
     
-    char* temp = new char[totalLength];
+    char* newArray = new char[totalLength + 1];
     
     for (int i = 0; i < m_length; i++) {
-        temp[i] = m_data[i];
+        newArray[i] = m_data[i];
     }
     for (int j = 0; j < rhs.m_length; j++) {
-        temp[m_length + j] = rhs.m_data[j];
+        newArray[m_length + j] = rhs.m_data[j];
     }
+    newArray[totalLength + 1] = '\0';
     
     delete[] m_data;
     
-    m_data = temp;
+    m_data = newArray;
     
     m_capacity = totalLength;
     m_length = totalLength;
@@ -126,18 +132,19 @@ String& String::operator+=(char* cstr) {
     
     int totalLength = m_length + length;
     
-    char* temp = new char[totalLength];
+    char* newArr = new char[totalLength + 1];
     
     for (int i = 0; i < m_length; i++) {
-        temp[i] = m_data[i];
+        newArr[i] = m_data[i];
     }
     for (int j = 0; j < length; j++) {
-        temp[m_length + j] = cstr[j];
+        newArr[m_length + j] = cstr[j];
     }
+    newArr[totalLength + 1] = '\0';
     
     delete[] m_data;
     
-    m_data = temp;
+    m_data = newArr;
     
     m_capacity += length;
     m_length = totalLength;
@@ -211,13 +218,14 @@ int String::length() const {
 void String::resize(int n) {
     cout << "Calling resize" << endl;
     
-    char* newArray = new char[n];
+    char* newArray = new char[n + 1];
     
     int i = 0;
     while (i < m_length) {
         newArray[i] = m_data[i];
         i++;
     }
+    newArray[i + 1] = '\0';
     
     // Delete old array
     delete[] m_data;
