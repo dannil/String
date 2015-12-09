@@ -206,7 +206,7 @@ void String::reserve(int n) {
     if (n > m_length) {
         for (int i = m_length; i < n; i++) {
             cout << "Adding char" << endl;
-            m_data[i] = *new char();
+            //m_data[i] = *new char();
         }
     }
 }
