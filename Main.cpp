@@ -83,7 +83,37 @@ int main(int argc, char** argv) {
     bool b2 = (eq3 == eq4);
     cout << b2 << endl;
     
+    String c;
+    c.push_back('q');
+    c.push_back('q');
+    c.push_back('q');
+    c.push_back('q');
+    c.push_back('q');
+    c.push_back('q');
+    c.push_back('q');
+    c.push_back('q');
+    
+    // qqqqqqqq
+    cout << c << endl;
+    
     //cout << "Char test" << endl;
+    
+    String qq;
+    qq = "abc";
+    
+    cout << qq << endl;
+    
+    String vv("qq)");
+    vv = 'b';
+    
+    // b
+    cout << vv << endl;
+    
+    String yy("aba");
+    yy += "bb";
+    
+    // ababb
+    cout << yy << endl;
     
     return 0;
 }
