@@ -39,8 +39,8 @@ class String {
         void shrink_to_fit();
         void push_back(char c);
         //resize();
-        //void reserve(int n);
         void resize(int n);
+        void reserve(int n);
 };
 
 String operator+(String a, const String& b);
