@@ -49,7 +49,11 @@ String::~String() {
 
 String& String::operator=(const String& rhs) {
     //cout << "Calling = String" << endl;
-      
+    
+    if (rhs == *this) {
+        return *this;
+    }
+    
     m_length = rhs.m_length;
     
     char* newArray = new char[m_length + 1];
