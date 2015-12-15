@@ -217,6 +217,15 @@ int String::length() const {
     return m_length;
 }
 
+void String::reserve(int n) {
+    if (n > m_capacity) {
+        resize(n);
+    }
+    if (n < m_length) {
+        shrink_to_fit();
+    }
+}
+
 void String::resize(int n) {
     //cout << "Calling resize" << endl;
     
