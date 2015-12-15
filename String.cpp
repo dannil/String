@@ -148,7 +148,6 @@ String& String::operator+=(char* cstr) {
     for (int i = 0; i < m_length; i++) {
         newArray[i] = m_data[i];
     }
-    
     for (int j = m_length; j < totalLength; j++) {
         newArray[j] = cstr[j - m_length];
     }
@@ -165,22 +164,12 @@ String& String::operator+=(char* cstr) {
 }
 
 bool operator==(const String& lhs, const String& rhs) {
-    // Next two if's maybe not needed?
-    if (lhs.length() == 0 && rhs.length() != 0) {
-        return false;
-    }
-    if (lhs.length() != 0 && rhs.length() == 0) {
-        return false;
-    }
-    
     // Needed to avoid unnecessary looping
     if (lhs.length() != rhs.length()) {
         return false;
     }
     
-    int max = (lhs.length() > rhs.length() ? lhs.length() : rhs.length());
-    
-    for (int i = 0; i < max; i++) {
+    for (int i = 0; i < lhs.length(); i++) {
         char c1 = lhs[i];
         char c2 = rhs[i];
         if (c1 != c2) {
@@ -258,6 +247,7 @@ void String::push_back(char c) {
     }
     
     m_data[place] = c;
+    m_data[place + 1] = '\0';
     m_length++;
 }
 
